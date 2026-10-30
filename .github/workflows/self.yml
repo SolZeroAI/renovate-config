@@ -1,0 +1,20 @@
+name: Renovate self
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: renovate
+  cancel-in-progress: false
+
+jobs:
+  renovate:
+    uses: ./.github/workflows/renovate.yml
+    secrets: inherit
+    with:
+      runs-on: ubuntu-latest
