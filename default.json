@@ -65,9 +65,12 @@
       ]
     },
     {
+      "description": "Keep GitHub Actions on major tags such as actions/checkout@v7.",
       "matchManagers": [
         "github-actions"
       ],
+      "rangeStrategy": "replace",
+      "pinDigests": false,
       "addLabels": [
         "release:none"
       ]

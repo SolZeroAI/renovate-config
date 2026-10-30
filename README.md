@@ -59,6 +59,7 @@ Pass `with: { runs-on: ubuntu-latest }` to the workflow call in a repository tha
 | `minimumReleaseAge` | An npm release must be 3 days old before Renovate proposes it. Security fixes skip this wait. |
 | `postUpgradeTasks` | Runs `nub install --prefer-frozen-lockfile --lockfile-only --ignore-scripts`, which changes only the `nub.lock` entries for the updated packages. |
 | `rebaseWhen: conflicted` | Renovate rebuilds a branch only when it conflicts. The rebuild regenerates `nub.lock`, so no human resolves a lock conflict. |
+| GitHub Actions | Stay on major tags such as `actions/checkout@v7`. Renovate does not pin them to exact versions or SHAs. |
 | Labels | `dependencies` on all, `security` on security updates, `release:none` on dev dependencies and GitHub Actions. |
 
 The caller workflow also runs Renovate after each push that changes a manifest or `nub.lock`. When one dependency pull request merges, Renovate rebuilds the others that now conflict, and auto-merge takes them in turn.
