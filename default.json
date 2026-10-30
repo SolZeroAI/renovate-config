@@ -1,0 +1,95 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "description": "Shared Renovate preset for SolZero repositories.",
+  "extends": [
+    "config:recommended",
+    "security:minimumReleaseAgeNpm"
+  ],
+  "rangeStrategy": "pin",
+  "labels": [
+    "dependencies"
+  ],
+  "prConcurrentLimit": 10,
+  "prHourlyLimit": 0,
+  "automerge": true,
+  "automergeType": "pr",
+  "platformAutomerge": true,
+  "rebaseWhen": "conflicted",
+  "postUpgradeTasks": {
+    "commands": [
+      "nub install --prefer-frozen-lockfile --lockfile-only --ignore-scripts"
+    ],
+    "fileFilters": [
+      "nub.lock"
+    ],
+    "executionMode": "branch"
+  },
+  "vulnerabilityAlerts": {
+    "labels": [
+      "dependencies",
+      "security"
+    ],
+    "automerge": true,
+    "schedule": []
+  },
+  "osvVulnerabilityAlerts": true,
+  "packageRules": [
+    {
+      "description": "Batch routine updates into one weekly pull request.",
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "pinDigest",
+        "digest"
+      ],
+      "groupName": "non-major dependencies",
+      "groupSlug": "non-major",
+      "schedule": [
+        "* 0-5 * * 1"
+      ]
+    },
+    {
+      "description": "A major update waits for a human merge.",
+      "matchUpdateTypes": [
+        "major"
+      ],
+      "automerge": false
+    },
+    {
+      "matchDepTypes": [
+        "devDependencies"
+      ],
+      "addLabels": [
+        "release:none"
+      ]
+    },
+    {
+      "description": "Keep GitHub Actions on major tags such as actions/checkout@v7.",
+      "matchManagers": [
+        "github-actions"
+      ],
+      "rangeStrategy": "replace",
+      "pinDigests": false,
+      "addLabels": [
+        "release:none"
+      ]
+    },
+    {
+      "matchPackageNames": [
+        "oxlint",
+        "@oxlint/plugins",
+        "oxfmt"
+      ],
+      "groupName": "oxc toolchain",
+      "groupSlug": "oxc-toolchain"
+    },
+    {
+      "matchPackageNames": [
+        "node",
+        "@types/node"
+      ],
+      "allowedVersions": "<25"
+    }
+  ]
+}
