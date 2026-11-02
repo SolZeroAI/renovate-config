@@ -17,7 +17,7 @@ Use Plain Language in introductory, expository, friendly, and other sensible com
 - A change here reaches every SolZero repository on its next Renovate run. Keep repository-specific rules in that repository's `renovate.json`.
 - Keep the `nub install` command in `default.json` and `RENOVATE_ALLOWED_COMMANDS` in `renovate.yml` identical.
 - Do not use `--no-frozen-lockfile` in `postUpgradeTasks`. It re-resolves the whole lock and makes dependency pull requests conflict.
-- Renovate runs on GitHub-hosted runners (`ubuntu-latest`), in public and private repositories. Do not move it to self-hosted runners. `postUpgradeTasks` run install scripts from new dependency versions.
+- Do not run Renovate on self-hosted runners. `postUpgradeTasks` run install scripts from new dependency versions.
 - Use major tags for GitHub Actions. Do not pin an action to a commit SHA or an exact version.
 - This repository is public. Do not add secrets, internal hostnames, or process notes.
 
