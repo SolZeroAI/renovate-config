@@ -54,13 +54,15 @@ Pass `with: { runs-on: ubuntu-latest }` to the workflow call in a repository tha
 | --- | --- |
 | `automerge`, `platformAutomerge` | Renovate turns on GitHub auto-merge. The pull request merges when the required checks pass. |
 | Major updates | Auto-merge is off. A human merges them. |
-| Minor, patch, pin and digest updates | Grouped into one `non-major dependencies` pull request each Monday before 06:00 UTC. The oxc toolchain gets its own group. |
+| Minor, patch, pin and digest updates | Grouped into one `non-major dependencies` pull request on Monday, 12:00–16:59 UTC. The oxc toolchain gets its own group. |
 | Security updates | Open at once, separately, and auto-merge when green. |
 | `minimumReleaseAge` | An npm release must be 3 days old before Renovate proposes it. Security fixes skip this wait. |
 | `postUpgradeTasks` | Runs `nub install --prefer-frozen-lockfile --lockfile-only --ignore-scripts`, which changes only the `nub.lock` entries for the updated packages. |
 | `rebaseWhen: conflicted` | Renovate rebuilds a branch only when it conflicts. The rebuild regenerates `nub.lock`, so no human resolves a lock conflict. |
 | GitHub Actions | Stay on major tags such as `actions/checkout@v7`. Renovate does not pin them to exact versions or SHAs. |
 | Labels | `dependencies` on all, `security` on security updates, `release:none` on dev dependencies and GitHub Actions. |
+
+Non-major updates use the schedule `* 12-16 * * 1` (Monday 12:00–16:59 UTC). Callers start Renovate with cron `17 6 * * *` (06:17 UTC). GitHub delivers that schedule event in the early afternoon UTC, and the Monday afternoon window overlaps those runs.
 
 The caller workflow also runs Renovate after each push that changes a manifest or `nub.lock`. When one dependency pull request merges, Renovate rebuilds the others that now conflict, and auto-merge takes them in turn.
 

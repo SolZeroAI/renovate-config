@@ -46,7 +46,7 @@
       "groupName": "non-major dependencies",
       "groupSlug": "non-major",
       "schedule": [
-        "* 0-5 * * 1"
+        "* 12-16 * * 1"
       ]
     },
     {
