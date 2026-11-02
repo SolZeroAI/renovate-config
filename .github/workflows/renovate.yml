@@ -8,7 +8,7 @@ on:
       runs-on:
         description: "Runner label for the Renovate job"
         type: string
-        default: blacksmith-4vcpu-ubuntu-2404
+        default: ubuntu-latest
 
 permissions:
   contents: read
