@@ -46,10 +46,17 @@ This repository keeps one Renovate setup for every SolZero repository. A reposit
    - Dependabot alerts on and Dependabot security updates off. Renovate reads the alerts and opens the security pull requests itself.
    - A `.nvmrc` file. The workflow reads the Node version from it.
 
-Set the runner in the workflow call with `with: { runs-on: <label> }`:
+Set the runner in the workflow call with `runs-on`. It takes one label or a JSON array of labels:
 
-- A private repository uses `blacksmith-4vcpu-ubuntu-2404`, the default. Renovate does not run on self-hosted runners.
-- A public repository uses `ubuntu-latest`. GitHub-hosted runners are free for public repositories.
+- A public repository uses the default, `ubuntu-latest`. GitHub-hosted runners are free for public repositories.
+- A private repository runs on the organization's self-hosted runners:
+
+  ```yaml
+  with:
+    runs-on: '["self-hosted","arm64","linux"]'
+  ```
+
+The lockfile command runs with `--ignore-scripts`, so a new dependency version does not run its install scripts on the runner.
 
 ## What the preset does
 
