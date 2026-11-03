@@ -6,9 +6,9 @@ on:
   workflow_call:
     inputs:
       runs-on:
-        description: "Runner label for the Renovate job"
+        description: 'Runner for the Renovate job: one label, or a JSON array of labels such as ["self-hosted","arm64","linux"]'
         type: string
-        default: blacksmith-4vcpu-ubuntu-2404
+        default: ubuntu-latest
 
 permissions:
   contents: read
@@ -17,7 +17,7 @@ jobs:
   renovate:
     name: Renovate
     if: github.repository_owner == 'SolZeroAI'
-    runs-on: ${{ inputs.runs-on }}
+    runs-on: ${{ startsWith(inputs.runs-on, '[') && fromJSON(inputs.runs-on) || inputs.runs-on }}
     timeout-minutes: 30
     steps:
       - name: Check out repository
