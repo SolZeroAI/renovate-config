@@ -59,4 +59,4 @@ jobs:
           RENOVATE_REQUIRE_CONFIG: required
           RENOVATE_ALLOWED_COMMANDS: '["^nub install --prefer-frozen-lockfile --lockfile-only --ignore-scripts$"]'
           LOG_LEVEL: info
-        run: npx --yes renovate@44.188.2
+        run: npx --yes renovate@44.238.2

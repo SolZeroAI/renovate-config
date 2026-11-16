@@ -23,4 +23,4 @@ jobs:
           node-version-file: .nvmrc
 
       - name: Validate Renovate config
-        run: npx --yes --package renovate@44.188.2 -- renovate-config-validator --strict default.json renovate.json
+        run: npx --yes --package renovate@44.238.2 -- renovate-config-validator --strict default.json renovate.json
